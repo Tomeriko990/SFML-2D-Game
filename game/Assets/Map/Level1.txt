@@ -1,0 +1,12 @@
+[Map]
+tile-sheet=/Users/tomerantebi/Documents/game/Assets/Map/Dungeon_tileset.png
+name=Level 1
+version=1
+tile-width=16
+tile-height=16
+scale-x=5
+scale-y=5
+dataNumber=6
+rows=3
+cols=2
+data=120,121,122,144,145,156

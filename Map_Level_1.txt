@@ -1,0 +1,19 @@
+[Map]
+tile-sheet=/Users/tomerantebi/Documents/rpgGame/game/Assets/Map/Dungeon_tileset.png
+name=Level 1
+version=1
+mapPositionX=50
+mapPositionY=25
+mapWidth=1122
+mapHeight=800
+cellSizeX=16
+cellSizeY=16
+mapScaleX=5
+mapScaleY=5
+rows=14
+cols=10
+exit_tiles_number=0
+exit_tiles=door_tiles_number=0
+door_tiles=wall_tiles_number=0
+wall_tiles=floor_tiles_number=0
+floor_tiles=

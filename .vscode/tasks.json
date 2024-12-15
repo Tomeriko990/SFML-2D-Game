@@ -1,0 +1,161 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			
+			"label": "build game",
+			"type": "shell",
+			"command": "/opt/homebrew/opt/llvm/bin/clang++",
+			"args": [
+				"-std=c++17",
+				"-stdlib=libc++",
+				"-arch",
+				"arm64",
+				"-g",
+				"${workspaceFolder}/game/src/game.cpp",
+				"${workspaceFolder}/game/src/States/State.cpp",
+				"${workspaceFolder}/game/src/Game_Engine.cpp",
+				"${workspaceFolder}/game/src/States/GameState.cpp",
+				"${workspaceFolder}/game/src/States/Main_menu_state.cpp",
+				"${workspaceFolder}/game/src/Button.cpp",
+				"${workspaceFolder}/game/src/Entity.cpp",
+				"${workspaceFolder}/game/src/Components/MovementComponent.cpp",
+				"${workspaceFolder}/game/src/Components/AnimationComponent.cpp",
+				"${workspaceFolder}/game/src/Components/HitboxComponent.cpp",
+				"${workspaceFolder}/game/src/Player.cpp",
+				"${workspaceFolder}/game/src/old/Enemy.cpp",
+				"${workspaceFolder}/game/src/old/ArrowStack.cpp",
+				"${workspaceFolder}/game/src/old/Textures.cpp",
+				"${workspaceFolder}/game/src/old/Math.cpp",
+				"-o",
+				"${workspaceFolder}/game/src/game",
+				"-I${workspaceFolder}/core/include",
+				"-L${workspaceFolder}/core",
+				"-lcore",
+				"-I/opt/homebrew/Cellar/sfml/2.6.1/include",
+				"-L/opt/homebrew/Cellar/sfml/2.6.1/lib",
+				"-lsfml-graphics",
+				"-lsfml-window",
+				"-lsfml-system"
+			],
+			"dependsOn": "copy core headers",
+			"group": "build",
+			"problemMatcher": [
+				"$gcc"
+			]
+		},
+		{
+			"label": "build core static library",
+			"type": "shell",
+			"command": "clang++",
+			"args": [
+				"-std=c++17",
+				"-stdlib=libc++",
+				"-arch",
+				"arm64",
+				"-g",
+				"-c",
+				"${workspaceFolder}/core/mapData.cpp",
+				"-o",
+				"${workspaceFolder}/core/mapData.o",
+				"-I/opt/homebrew/Cellar/sfml/2.6.1/include",
+				"-L/opt/homebrew/Cellar/sfml/2.6.1/lib",
+				"-lsfml-graphics",
+				"-lsfml-window",
+				"-lsfml-system"
+			],
+			"group": {
+				"kind": "build",
+				"isDefault": false
+			},
+			"problemMatcher": [
+				"$gcc"
+			]
+		},
+		{
+			"label": "create static library",
+			"type": "shell",
+			"command": "ar",
+			"args": [
+				"rcs",
+				"${workspaceFolder}/core/libcore.a",
+				"${workspaceFolder}/core/mapData.o",
+				
+			],
+			"dependsOn": "build core static library",
+			"group": "build",
+			"problemMatcher": []
+		},
+		{
+			"label": "copy core headers",
+			"type": "shell",
+			"command": "cp",
+			"args": [
+				"${workspaceFolder}/core/*.h",
+				"${workspaceFolder}/core/include",
+			],
+			"group": "build",
+			"problemMatcher": [],
+			"dependsOn": [
+				"build core static library",
+				"create static library"
+			]
+		},
+		{
+			"label": "build mapeditor",
+			"type": "shell",
+			"command": "/opt/homebrew/opt/llvm/bin/clang++",
+			"args": [
+				"-std=c++17",
+				"-stdlib=libc++",
+				"-arch",
+				"arm64",
+				"-g",
+				"${workspaceFolder}/MapEditor/main.cpp",
+				"${workspaceFolder}/MapEditor/Grid.cpp",
+				"${workspaceFolder}/MapEditor/MouseTile.cpp",
+				"${workspaceFolder}/MapEditor/Map_E.cpp",
+				"${workspaceFolder}/MapEditor/mapSaver.cpp",
+				"-o",
+				"${workspaceFolder}/MapEditor/main",
+				"-I${workspaceFolder}/core/include",
+				"-L${workspaceFolder}/core",
+				"-lcore",
+				"-I/opt/homebrew/Cellar/sfml/2.6.1/include",
+				"-L/opt/homebrew/Cellar/sfml/2.6.1/lib",
+				"-lsfml-graphics",
+				"-lsfml-window",
+				"-lsfml-system"
+			],
+			"dependsOn": "copy core headers",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"problemMatcher": [
+				"$gcc"
+			]
+		},
+		{
+			"type": "cppbuild",
+			"label": "C/C++: clang++ build active file",
+			"command": "/opt/homebrew/opt/llvm/bin/clang++",
+			"args": [
+				"-fcolor-diagnostics",
+				"-fansi-escape-codes",
+				"-g",
+				"${file}",
+				"-o",
+				"${fileDirname}/${fileBasenameNoExtension}"
+			],
+			"options": {
+				"cwd": "${fileDirname}"
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": "build",
+			"detail": "compiler: /usr/bin/clang++"
+		}
+	]
+}
