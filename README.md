@@ -25,6 +25,6 @@ This is an ongoing project for a 2D game built using **SFML** (Simple and Fast M
    git clone https://github.com/Tomeriko990/SFML-2D-Game.git
 2. Install SFML and any required dependencies (make sure to set up SFML correctly for your platform).
 
-3.Build the project using a C++ compiler (e.g., g++, clang++), and ensure proper linking with SFML libraries.
+   3.Build the project using a C++ compiler (e.g., g++, clang++), and ensure proper linking with SFML libraries.
 
-4.Run the executable to start playing. Keep in mind that the project is still under development, so some features may not be fully functional yet.
+   4.Run the executable to start playing. Keep in mind that the project is still under development, so some features may not be fully functional yet.
